@@ -1,0 +1,7 @@
+form div {
+    padding-bottom: 10%;
+}
+
+.errorMessage {
+    color: red;
+}
