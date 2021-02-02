@@ -21,7 +21,6 @@ export const createUser = (userObject) => async (dispatch) => {
                     let splitTime = firstGlassTime.split(":");
                     let hour = parseInt(splitTime[0]) < 10 ? '0' + splitTime[0] : splitTime[0];
                     let minutes = parseInt(splitTime[1]) < 10 ? '0' + splitTime[1] : splitTime[1];
-                    debugger
                     if (parseInt(splitTime[0]) > 12) {
                         hour = splitTime[0] - 12 < 10 ? '0' + (splitTime[0] - 12) : splitTime[0] - 12;
                         return `${hour}:${minutes} PM`
@@ -78,9 +77,7 @@ export const createUser = (userObject) => async (dispatch) => {
 export const drinkWaterGlass = (time, repeatTimeArray) => async (dispatch) => {
     try {
         const data = await axios.post(`${url}/water/drinkWater`, time)
-        debugger
         if (data.status === 200) {
-            debugger
             let repeatTime = [...repeatTimeArray];
             repeatTime.forEach(repeat => {
                 if (repeat.time === data.data.drinkTime) {
