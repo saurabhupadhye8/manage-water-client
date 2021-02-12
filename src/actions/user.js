@@ -51,15 +51,19 @@ export const createUser = (userObject) => async (dispatch) => {
                     const waterGap = Math.floor(totalWorkTime / goalForWorkTime);
                     let firstGlassTime = calculateTime(startTimeSplit, waterGap);
                     const convertTime = convert(firstGlassTime);
-                    repeatTime.push({time: convertTime, drank: false});
+                    if (goalForWorkTime > 0) {
+                        repeatTime.push({ time: convertTime, drank: false });
+                    }
             
                     if (goalForWorkTime > 1) {
                         for (let i = 0; i < Math.floor(goalForWorkTime); i++) {
                             firstGlassTime = calculateTime(firstGlassTime.split(':'), waterGap);
                             let convertTime = convert(firstGlassTime);
-                            repeatTime.push({time: convertTime, drank: false})
+                                repeatTime.push({ time: convertTime, drank: false })
                         }
-                    }
+                        data.data.goalForWorkTime = repeatTime.length;
+
+                    }s
                 }
                 dispatch({ type:'CREATE_USER_SUCCESS', payload: data });
                 dispatch({type: 'WATER_DRINK_TIME', payload: repeatTime});

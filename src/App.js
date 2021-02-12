@@ -4,7 +4,7 @@ import UserGoal from './components/UserGoal';
 import UserHistory from './components/UserHistory';
 import UserDetails from './components/UserDetails';
 import { createUser } from './actions/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 
@@ -14,29 +14,30 @@ const App = () => {
 	const [showUserHistory, setUserHistory] = useState(false);
 	const checkUser = userDetails => {
 		dispatch(createUser(userDetails)).then(res => setHistory(res));
-    };
+	};
+	const userReducer = useSelector(state => state.userReducer);
     
-    const updateHistoryClick = (e) => {
+    const updateHistoryClick = (e, value) => {
         e.preventDefault();
-        setUserHistory(true);
+        setUserHistory(value);
     }
 
 	let pageToRender = showUserHistory ? (
 		<div className="row">
-			<div className="col s6 l6">
-				<UserHistory />
+			<div className="col s6 l6 center">
+				<UserHistory updateHistoryClick={updateHistoryClick} />
 			</div>
-			<div className="col s6 l6">
+			<div className="col s6 l6 center">
 				<UserDetails />
 			</div>
 		</div>
 	) : (
 		<div className="row">
-			<div className="col s6 l6">
-				<UserForm checkUser={checkUser} history={history} updateHistoryClick={updateHistoryClick} />
+			<div className="col s6 l6 center">
+				<UserForm checkUser={checkUser} history={history} updateHistoryClick={updateHistoryClick} userReducer={userReducer} />
 			</div>
-			<div className="col s6 l6">
-				<UserGoal checkUser={checkUser} />
+			<div className="col s6 l6 center">
+				<UserGoal checkUser={checkUser} history={history} />
 			</div>
 		</div>
 	);

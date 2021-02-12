@@ -5,10 +5,10 @@ class UserForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            startTime: '',
-            endTime: '',
-            weight: '',
+            name: this.props.userReducer && this.props.userReducer.user && this.props.userReducer.user.name ? this.props.userReducer.user.name : '',
+            startTime: this.props.userReducer && this.props.userReducer.user && this.props.userReducer.user.startTime ? this.props.userReducer.user.startTime : '',
+            endTime: this.props.userReducer && this.props.userReducer.user && this.props.userReducer.user.endTime ? this.props.userReducer.user.endTime : '',
+            weight: this.props.userReducer && this.props.userReducer.user && this.props.userReducer.user.weight ? this.props.userReducer.user.weight : '',
             errorObject: {},
         }
     }
@@ -72,7 +72,7 @@ class UserForm extends Component {
 					<form onSubmit={this.onSubmit}>
 						<div className="input-field">
 							<input type="text" id="name" value={this.state.name} onChange={this.fieldChange} />
-							<label htmlFor="name">Your Name</label>
+							<label htmlFor="name" className={this.state.name.length > 0 ? "active" : ''}>Your Name</label>
 							<span className="errorMessage">{this.state.errorObject['name']}</span>
 						</div>
 						<div className="input-field">
@@ -82,7 +82,7 @@ class UserForm extends Component {
 								value={this.state.startTime}
 								onChange={this.fieldChange}
 							/>
-							<label htmlFor="startTime">Work Start Time</label>
+							<label htmlFor="startTime" className={this.state.startTime.length > 0 ? "active" : ''}>Work Start Time</label>
 							<span className="errorMessage">{this.state.errorObject['startTime']}</span>
 						</div>
 						<div className="input-field">
@@ -93,7 +93,7 @@ class UserForm extends Component {
 								value={this.state.endTime}
 								onChange={this.fieldChange}
 							/>
-							<label htmlFor="endTime">Work End Time</label>
+							<label htmlFor="endTime" className={this.state.endTime.length > 0 ? "active" : ''}>Work End Time</label>
 							<span className="errorMessage">{this.state.errorObject['endTime']}</span>
 						</div>
 						<div className="input-field">
@@ -104,14 +104,14 @@ class UserForm extends Component {
 								value={this.state.weight}
 								onChange={this.fieldChange}
 							/>
-							<label htmlFor="weight">Weight</label>
+							<label htmlFor="weight" className={this.state.weight.length > 0 ? "active" : ''}>Weight</label>
 							<span className="errorMessage">{this.state.errorObject['weight']}</span>
 						</div>
 						<button className="waves-effect waves-light btn">Submit</button>
 					</form>
 				</div>
 				{this.props.history ? <div className="row">
-					<button className="waves-effect waves-dark btn" onClick={this.props.updateHistoryClick}>History</button>
+					<button className="waves-effect waves-dark btn" onClick={(e) => this.props.updateHistoryClick(e, true)}>History</button>
 				</div> : <div />}
 			</div>
 		);
