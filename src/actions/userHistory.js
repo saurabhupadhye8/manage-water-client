@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000';
+const url = 'https://water-management-server.herokuapp.com';
 
 export const fetchTable = (userObject) => async (dispatch) => {
     try {
@@ -12,5 +12,4 @@ export const fetchTable = (userObject) => async (dispatch) => {
     } catch(error) {
         dispatch({ type:'GET_WATER_DETAILS_FAILURE', payload: error });
     }
-
 }

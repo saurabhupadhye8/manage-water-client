@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000';
+const url = 'https://water-management-server.herokuapp.com';
 
 export const createUser = (userObject) => async (dispatch) => {
     try {
@@ -62,8 +62,7 @@ export const createUser = (userObject) => async (dispatch) => {
                                 repeatTime.push({ time: convertTime, drank: false })
                         }
                         data.data.goalForWorkTime = repeatTime.length;
-
-                    }s
+                    }
                 }
                 dispatch({ type:'CREATE_USER_SUCCESS', payload: data });
                 dispatch({type: 'WATER_DRINK_TIME', payload: repeatTime});
